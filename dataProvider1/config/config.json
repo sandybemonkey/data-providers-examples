@@ -1,6 +1,6 @@
 {
   "env":"development",
-  "checkTokenURL": "http://localhost:3000/oauth2/checktoken",
+  "checkTokenURL": "http://fcp.dev.dev-franceconnect.fr/oauth2/checktoken",
   "scopes": {
     "/quotientfamilial": "revenu_fiscal_de_reference"
   }
