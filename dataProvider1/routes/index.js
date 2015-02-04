@@ -36,7 +36,7 @@ router.get('/quotientfamilial', function (req, res) {
             }
             else {
                 res.statusCode = 200;
-                res.send(info.toString());
+                res.send(JSON.stringify(info));
             }
         });
     }
