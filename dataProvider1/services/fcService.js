@@ -1,14 +1,15 @@
 var request = require('request');
 var config = (new (require('../helpers/configManager.js'))())._rawConfig;
 
-function FcService() {}
+function FcService() {
+}
 
-FcService.prototype.checkAccessToken = function(accessToken, callback) {
-    var url = config.checkTokenURL+'?token='+accessToken;
-    request(url, function(error, response, body) {
+FcService.prototype.checkAccessToken = function (accessToken, callback) {
+    var url = config.checkTokenURL;
+    request.post({url: url, headers: {'content-type': 'application/json'}, json: {"token": accessToken}}, function (error, response, body) {
         // if the server can't be reached, send this error
+        var errorObj = new Error();
         if (!response) {
-            var errorObj = new Error();
             errorObj.name = 'fc_unreachable';
             errorObj.message = 'France Connect server can\'t be reached.';
             callback(errorObj, null);
@@ -33,7 +34,6 @@ FcService.prototype.checkAccessToken = function(accessToken, callback) {
                 }
                 // if the error is well formed, return it
                 else {
-                    var errorObj = new Error();
                     errorObj.name = bodyObj.error.name;
                     errorObj.message = bodyObj.error.message;
                     callback(errorObj, null);
@@ -55,6 +55,6 @@ FcService.prototype.checkAccessToken = function(accessToken, callback) {
             callback(unknownError, null);
         }
     });
-}
+};
 
 module.exports = new FcService();

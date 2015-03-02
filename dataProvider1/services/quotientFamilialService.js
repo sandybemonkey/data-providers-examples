@@ -12,7 +12,7 @@ QuotientFamilial.prototype.getWithAccessToken = function (accessToken, callback)
         }
         else {
             try {
-                json = JSON.parse(res);
+                var json = res;
             }
             catch (err) {
                 callback(err,null);
@@ -35,6 +35,6 @@ QuotientFamilial.prototype.getWithAccessToken = function (accessToken, callback)
             }
         }
     });
-}
+};
 
 module.exports = new QuotientFamilial();
