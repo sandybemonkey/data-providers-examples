@@ -15,16 +15,16 @@ QuotientFamilial.prototype.getWithAccessToken = function (accessToken, callback)
                 var json = res;
             }
             catch (err) {
-                callback(err,null);
+                callback(err, null);
             }
             if (json) {
                 var userIdentity = json.identity;
                 var allowedScopes = json.scope;
 
                 if (allowedScopes.indexOf(config.scopes['/quotientfamilial']) != -1) {
-                    console.log('scopes allowed for this user : ' + userIdentity.family_name);
+                    console.log('scope quotientfamilial allowed for this user : ' + userIdentity.family_name+ ' for service provider ' + json.client.client_id + '/' + json.client.client_name);
                     var quotient = dao.getQuotientFamilial(userIdentity);
-                    callback(null, {pivotIdentity:userIdentity, quotient:quotient});
+                    callback(null, {pivotIdentity: userIdentity, quotient: quotient});
                 }
                 else {
                     var errorObj = new Error();
