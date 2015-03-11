@@ -22,7 +22,7 @@ QuotientFamilial.prototype.getWithAccessToken = function (accessToken, callback)
                 var allowedScopes = json.scope;
 
                 if (allowedScopes.indexOf(config.scopes['/quotientfamilial']) != -1) {
-                    console.log('scope quotientfamilial allowed for this user : ' + userIdentity.family_name);
+                    console.log('scopes allowed for this user : ' + userIdentity.family_name);
                     var quotient = dao.getQuotientFamilial(userIdentity);
                     callback(null, {pivotIdentity:userIdentity, quotient:quotient});
                 }

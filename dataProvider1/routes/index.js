@@ -21,10 +21,16 @@ router.get('/quotientfamilial', function (req, res) {
     if (accessToken) {
         quotientFamilial.getWithAccessToken(accessToken, function (err, info) {
             if (err) {
-                if (err.name == 'invalid_request') res.statusCode = 400;
+                if (err.name == 'invalid_request') {
+                    console.error('Invalid request !');
+                    res.statusCode = 400;
+                }
                 else if (err.name == 'invalid_token') res.statusCode = 401;
                 else if (err.name == 'insufficient_scope') res.statusCode = 403;
-                else res.statusCode = 400;
+                else {
+                    console.error('Something went wrong ... dunno what though ...')
+                    res.statusCode = 400;
+                }
                 if (!('name' in err)) {
                     err.name = 'unexpected_error';
                 }
