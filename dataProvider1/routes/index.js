@@ -28,7 +28,7 @@ router.get('/quotientfamilial', function (req, res) {
                 else if (err.name == 'invalid_token') res.statusCode = 401;
                 else if (err.name == 'insufficient_scope') res.statusCode = 403;
                 else {
-                    console.error('unexpected error with token validation : ' + JSON.stringify(err))
+                    console.error('unexpected error with token validation : ' + JSON.stringify(err));
                     res.statusCode = 400;
                 }
                 if (!('name' in err)) {
