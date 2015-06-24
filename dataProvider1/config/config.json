@@ -2,6 +2,6 @@
   "env":"development",
   "checkTokenURL": "http://fcp.dev.dev-franceconnect.fr/oauth2/checktoken",
   "scopes": {
-    "/quotientfamilial": "revenu_fiscal_de_reference"
+    "/quotientfamilial": "dgfip_revenu_fiscal_de_reference"
   }
 }
