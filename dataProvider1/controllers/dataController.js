@@ -1,14 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var quotientFamilial = require('../services/dataService.js');
-var dataController =  new (require('../controllers/dataController.js').DataController)();
+'use strict';
 
-router.get('/', function (req, res) {
-    res.render('index');
-});
+var dataService = require('../services/dataService');
 
-router.get('/quotientfamilial', function (req, res) {
+var DataController = function () {
+};
 
+DataController.prototype.getUserData = function (req, res) {
     var accessToken;
     try {
         accessToken = req.header('Authorization').split(" ")[1];
@@ -20,7 +17,7 @@ router.get('/quotientfamilial', function (req, res) {
     }
 
     if (accessToken) {
-        quotientFamilial.getQuotientFamilialWithAccessToken(accessToken, function (err, info) {
+        dataService.getFakeDgfipDataWithAccessToken(accessToken, function (err, info) {
             if (err) {
                 if (err.name == 'invalid_request') {
                     console.error('Invalid request !');
@@ -47,10 +44,6 @@ router.get('/quotientfamilial', function (req, res) {
             }
         });
     }
-});
+};
 
-router.get('/courtier/apiuniverselle',
-    dataController.getUserData.bind(dataController)
-);
-
-module.exports = router;
+module.exports.DataController = DataController;
