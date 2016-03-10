@@ -41,7 +41,27 @@ DataService.prototype.getQuotientFamilialWithAccessToken = function (accessToken
     });
 };
 
+DataService.prototype.formatUserData = function (rawData) {
+    var formattedData = {};
+
+    _.forEach(rawData, function (value, key) {
+        if (_.contains(DGFIP_SCOPES, key)) {
+            if (key !== 'dgfip_nbpac') {
+                formattedData[key] = value;
+            }
+            else {
+                formattedData.pac = {
+                    nbPac: value
+                };
+            }
+        }
+    });
+
+    return formattedData;
+};
+
 DataService.prototype.getFakeDgfipDataWithAccessToken = function (accessToken, callback) {
+    var self = this;
     fc.checkAccessToken(accessToken, function (err, res) {
         if (err) {
             callback(err, null);
@@ -67,14 +87,7 @@ DataService.prototype.getFakeDgfipDataWithAccessToken = function (accessToken, c
                            callback(err, null);
                        }
                         else {
-                           var formattedData = {
-                               'rfr': userData.dgfip_rfr,
-                               'sitFam': userData.dgfip_sitfam,
-                               'nbPart': userData.dgfip_nbpart,
-                               'pac': {
-                                   'nbPac': userData.dgfip_nbpac
-                               }
-                           };
+                           var formattedData = self.formatUserData(userData);
                            callback(null, formattedData);
                        }
                     });
