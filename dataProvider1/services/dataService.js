@@ -42,20 +42,14 @@ DataService.prototype.getQuotientFamilialWithAccessToken = function (accessToken
 };
 
 DataService.prototype.formatUserData = function (rawData) {
-    var formattedData = {};
-
-    _.forEach(rawData, function (value, key) {
-        if (_.contains(DGFIP_SCOPES, key)) {
-            if (key !== 'dgfip_nbpac') {
-                formattedData[key] = value;
-            }
-            else {
-                formattedData.pac = {
-                    nbPac: value
-                };
-            }
+    var formattedData = {
+        'rfr': rawData.dgfip_rfr || 0,
+        'sitFam': rawData.dgfip_sitfam || 'C',
+        'nbPart': rawData.dgfip_nbpart || 1.0,
+        'pac': {
+            'nbPac': rawData.dgfip_nbpac || 0
         }
-    });
+    };
 
     return formattedData;
 };
