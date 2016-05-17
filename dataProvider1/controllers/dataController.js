@@ -29,6 +29,7 @@ function retrieveUserData(accessToken, res){
         }
         else {
             res.statusCode = 200;
+            res.set({'content-type': 'application/json'});
             res.send(JSON.stringify(info));
         }
     });
@@ -51,6 +52,7 @@ DataController.prototype.getUserData = function (req, res) {
         }
         else {
             res.statusCode = 200;
+            res.set({'content-type': 'application/json'});
             res.send(JSON.stringify({}));
         }
 
