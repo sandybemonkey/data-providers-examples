@@ -47,7 +47,7 @@ DataController.prototype.getUserData = function (req, res) {
     }
 
     if (accessToken) {
-        if(req.params.year === '2016'){
+        if(req.params.year === '2014'){
             retrieveUserData(accessToken, res);
         }
         else {
