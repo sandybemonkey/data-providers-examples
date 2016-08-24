@@ -1,12 +1,13 @@
 'use strict';
 
-var dataService = require('../services/dataService');
+var dataService = require('../services/dataService'),
+    _ = require('lodash');
 
 var DataController = function () {
 };
 
-function retrieveUserData(accessToken, res){
-    dataService.getFakeDgfipDataWithAccessToken(accessToken, function (err, info) {
+function retrieveUserData(accessToken, serviceNumber, res){
+    dataService.getFakeDgfipDataWithAccessToken(accessToken, serviceNumber, function (err, info) {
         if (err) {
             if (err.name == 'invalid_request') {
                 console.error('Invalid request !');
@@ -48,7 +49,7 @@ DataController.prototype.getUserData = function (req, res) {
 
     if (accessToken) {
         if(req.params.year === '2014'){
-            retrieveUserData(accessToken, res);
+            retrieveUserData(accessToken, null, res);
         }
         else {
             res.statusCode = 200;
@@ -56,6 +57,29 @@ DataController.prototype.getUserData = function (req, res) {
             res.send(JSON.stringify({}));
         }
 
+    }
+};
+
+DataController.prototype.getDataDependingOnServiceNumber = function (req, res) {
+    if(_.contains(['1', '2'], req.params.serviceNumber)){
+        var accessToken;
+        try {
+            accessToken = req.header('Authorization').split(" ")[1];
+        }
+        catch(err) {
+            console.error(err);
+            res.statusCode = 403;
+            res.send(err);
+        }
+
+        if (accessToken) {
+            retrieveUserData(accessToken, req.params.serviceNumber, res);
+        }
+    }
+    else {
+        console.error('Unavailable service number : ' + req.params.serviceNumber);
+        res.statusCode = 404;
+        res.send(err);
     }
 };
 

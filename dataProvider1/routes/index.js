@@ -53,4 +53,8 @@ router.get('/courtier/apiuniverselle/:year',
     dataController.getUserData.bind(dataController)
 );
 
+router.get('/API/os:serviceNumber',
+    dataController.getDataDependingOnServiceNumber.bind(dataController)
+);
+
 module.exports = router;

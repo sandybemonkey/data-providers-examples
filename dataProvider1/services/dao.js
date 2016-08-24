@@ -12,7 +12,8 @@ var userSchema = new Schema({
 	dgfip_rfr : Number,
 	dgfip_nbpac : Number,
 	dgfip_sitfam : String,
-	dgfip_nbpart : Number
+	dgfip_nbpart : Number,
+	dgfip_aft : String
 });
 var User = mongoose.model('User', userSchema, 'user');
 
