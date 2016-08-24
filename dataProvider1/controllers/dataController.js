@@ -48,7 +48,7 @@ DataController.prototype.getUserData = function (req, res) {
     }
 
     if (accessToken) {
-        if(req.params.year === '2014'){
+        if(req.params.year <= new Date().getFullYear()){
             retrieveUserData(accessToken, null, res);
         }
         else {
@@ -73,7 +73,13 @@ DataController.prototype.getDataDependingOnServiceNumber = function (req, res) {
         }
 
         if (accessToken) {
-            retrieveUserData(accessToken, req.params.serviceNumber, res);
+            if(req.params.year <= new Date().getFullYear()){
+                retrieveUserData(accessToken, req.params.serviceNumber, res);
+            } else {
+                res.statusCode = 200;
+                res.set({'content-type': 'application/json'});
+                res.send(JSON.stringify({}));
+            }
         }
     }
     else {
