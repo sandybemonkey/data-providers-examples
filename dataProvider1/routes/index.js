@@ -53,7 +53,7 @@ router.get('/courtier/apiuniverselle/:year',
     dataController.getUserData.bind(dataController)
 );
 
-router.get('/API/os:serviceNumber/:year',
+router.get('/impotsparticuliers/os:serviceNumber/:year',
     dataController.getDataDependingOnServiceNumber.bind(dataController)
 );
 
