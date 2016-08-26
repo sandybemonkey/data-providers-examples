@@ -49,7 +49,7 @@ router.get('/quotientfamilial', function (req, res) {
     }
 });
 
-router.get('/courtier/apiuniverselle/:year',
+router.get('/universelle/os1/:year',
     dataController.getUserData.bind(dataController)
 );
 
