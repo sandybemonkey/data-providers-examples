@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var quotientFamilial = require('../services/dataService.js');
-var dataController =  new (require('../controllers/dataController.js').DataController)();
+var dataController = new (require('../controllers/dataController.js').DataController)();
 
 router.get('/', function (req, res) {
     res.render('index');
@@ -13,7 +13,7 @@ router.get('/quotientfamilial', function (req, res) {
     try {
         accessToken = req.header('Authorization').split(" ")[1];
     }
-    catch(err) {
+    catch (err) {
         console.error(err);
         res.statusCode = 400;
         res.send(err);
