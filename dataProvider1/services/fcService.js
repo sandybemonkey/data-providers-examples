@@ -17,7 +17,7 @@ FcService.prototype.checkAccessToken = function (accessToken, callback) {
         // if there is a response with code 400, there should be a body. parse it and return an error
         else if (response.statusCode == 400 || response.statusCode == 401) {
             try {
-                var bodyObj = JSON.parse(response.body);
+                var bodyObj = response.body;
             }
             // if there is no body, don't crash the server...
             catch (err) {
